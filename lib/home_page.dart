@@ -14,7 +14,7 @@ class _HomePageState extends State<HomePage> {
 
   List toDoList = [
     ['Fix the bug', false],
-    ['New Project', false],
+    ['Commit Code', false],
   ];
 
   void checkBoxChanged(bool? value, int index) {
@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
         title: Text(
           'TO DO',
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-              fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
+              fontSize: 22, color: Colors.black, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         elevation: 0,
