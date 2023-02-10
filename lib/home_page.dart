@@ -15,6 +15,7 @@ class _HomePageState extends State<HomePage> {
   List toDoList = [
     ['Fix the bug', false],
     ['Commit Code', false],
+    ['Read', false],
   ];
 
   void checkBoxChanged(bool? value, int index) {
@@ -22,6 +23,8 @@ class _HomePageState extends State<HomePage> {
       toDoList[index][1] = !toDoList[index][1];
     });
   }
+
+  late final TextEditingController textEditingController;
 
   @override
   Widget build(BuildContext context) {
