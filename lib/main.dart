@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Todo App',
       theme: ThemeData(
-        primarySwatch: Colors.yellow
+        primarySwatch: Colors.orange
       ),
       home: const HomePage(),
       debugShowCheckedModeBanner: false,

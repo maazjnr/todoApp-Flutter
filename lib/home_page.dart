@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:todo_app/util/dialog_box.dart';
 import 'package:todo_app/util/todo_tile.dart';
 
 class HomePage extends StatefulWidget {
@@ -11,11 +12,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final _controller = TextEditingController();
 
   List toDoList = [
     ['Fix the bug', false],
     ['Commit Code', false],
-    ['Read', false],
   ];
 
   void checkBoxChanged(bool? value, int index) {
@@ -24,12 +25,35 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  late final TextEditingController textEditingController;
+  //save new task
+
+  void savedNewTask() {
+    setState(() {
+      toDoList.add([_controller.text, false]);
+      _controller.clear();
+    });
+
+    Navigator.of(context).pop();
+  }
+
+  // create a new task
+  void createANewTask() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return DialogBox(
+          controller: _controller,
+          onSaved: savedNewTask,
+          onCanceled: () => Navigator.of(context).pop(),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.yellow[200],
+      backgroundColor: Colors.orange[200],
       appBar: AppBar(
         title: Text(
           'TO DO',
@@ -39,14 +63,18 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         elevation: 0,
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: createANewTask,
+        child: Icon(Icons.add),
+      ),
       body: ListView.builder(
-        itemCount: toDoList.length,
-        itemBuilder: (context, index) {
-          return TodoTile(taskName: toDoList[index][0], 
-          isTaskCompleted: toDoList[index][1] , 
-          onChanged: (value) => checkBoxChanged(value, index)
-          );
-        } ),
+          itemCount: toDoList.length,
+          itemBuilder: (context, index) {
+            return TodoTile(
+                taskName: toDoList[index][0],
+                isTaskCompleted: toDoList[index][1],
+                onChanged: (value) => checkBoxChanged(value, index));
+          }),
     );
   }
 }
