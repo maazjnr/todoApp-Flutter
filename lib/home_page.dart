@@ -26,7 +26,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   //save new task
-
   void savedNewTask() {
     setState(() {
       toDoList.add([_controller.text, false]);
@@ -35,7 +34,6 @@ class _HomePageState extends State<HomePage> {
 
     Navigator.of(context).pop();
   }
-
   // create a new task
   void createANewTask() {
     showDialog(
@@ -50,15 +48,21 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  void deleteTask (int index) {
+    setState(() {
+      toDoList.removeAt(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.orange[200],
       appBar: AppBar(
         title: Text(
-          'TO DO',
+          'Simple Todo Application',
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-              fontSize: 22, color: Colors.black, fontWeight: FontWeight.bold),
+              fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         elevation: 0,
@@ -73,7 +77,9 @@ class _HomePageState extends State<HomePage> {
             return TodoTile(
                 taskName: toDoList[index][0],
                 isTaskCompleted: toDoList[index][1],
-                onChanged: (value) => checkBoxChanged(value, index));
+                onChanged: (value) => checkBoxChanged(value, index),
+                deleteFunction: (context) => deleteTask(index),
+                );
           }),
     );
   }
