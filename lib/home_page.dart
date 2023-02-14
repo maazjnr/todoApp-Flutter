@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
   final _controller = TextEditingController();
 
   List toDoList = [
-    ['Fix the bug', false],
+    ['Fix the bugs', false],
     ['Commit Code', false],
   ];
 
