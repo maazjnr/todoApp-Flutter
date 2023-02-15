@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Todo App',
+      title: 'TodoApp',
       theme: ThemeData(
         primarySwatch: Colors.orange
       ),
@@ -20,4 +20,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
